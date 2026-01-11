@@ -17,6 +17,7 @@ import { PostsService } from './posts.service';
 import type { Post as PostInterface } from './interfaces/posts.interface';
 import { CreatePostDto } from './dto/create-post.dto';
 import { UpdatePostDto } from './dto/update-post.dto';
+import { PostExistsPipe } from './pipes/post-exists.pipe';
 
 @Controller('posts')
 export class PostsController {
@@ -36,7 +37,9 @@ export class PostsController {
   }
 
   @Get(':id')
-  findOne(@Param('id', ParseIntPipe) id: number): PostInterface {
+  findOne(
+    @Param('id', ParseIntPipe, PostExistsPipe) id: number,
+  ): PostInterface {
     return this.postsService.findOne(id);
   }
 
@@ -57,7 +60,7 @@ export class PostsController {
 
   @Put(':id')
   update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('id', ParseIntPipe, PostExistsPipe) id: number,
     @Body()
     updatePostData: UpdatePostDto,
   ): PostInterface {
@@ -65,7 +68,9 @@ export class PostsController {
   }
 
   @Delete(':id')
-  remove(@Param('id', ParseIntPipe) id: number): { message: string } {
+  remove(@Param('id', ParseIntPipe, PostExistsPipe) id: number): {
+    message: string;
+  } {
     return this.postsService.remove(id);
   }
 }
