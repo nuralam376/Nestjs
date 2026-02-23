@@ -1,10 +1,10 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException } from "@nestjs/common";
 
 @Injectable()
 export class StudentService {
   private stundents = [
-    { id: 1, name: 'Abc', age: 21 },
-    { id: 2, name: 'Def', age: 22 },
+    { id: 1, name: "Abc", age: 21 },
+    { id: 2, name: "Def", age: 22 },
   ];
 
   getAllStudents() {
@@ -14,7 +14,7 @@ export class StudentService {
   getStudentById(id: number) {
     const student = this.stundents.find((std) => std.id === id);
 
-    if (!student) throw new NotFoundException('Student not found');
+    if (!student) throw new NotFoundException("Student not found");
 
     return student;
   }
@@ -30,7 +30,7 @@ export class StudentService {
 
   updateStudent(id: number, data: { name: string; age: number }) {
     const studentIndex = this.stundents.findIndex((std) => std.id === id);
-    if (studentIndex === -1) throw new NotFoundException('Student not found');
+    if (studentIndex === -1) throw new NotFoundException("Student not found");
     this.stundents[studentIndex] = {
       id,
       ...data,
@@ -46,8 +46,8 @@ export class StudentService {
 
   deleteStudent(id: number) {
     const studentIndex = this.stundents.findIndex((std) => std.id === id);
-    if (studentIndex === -1) throw new NotFoundException('Student not found!');
+    if (studentIndex === -1) throw new NotFoundException("Student not found!");
     const deletedStudent = this.stundents.splice(studentIndex, 1);
-    return { message: 'Deleted Successfully', student: deletedStudent };
+    return { message: "Deleted Successfully", student: deletedStudent };
   }
 }
