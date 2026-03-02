@@ -19,4 +19,26 @@ export class TeacherService {
   async getTeacherById(id: string): Promise<Teacher | null> {
     return this.teacherModel.findById(id).exec();
   }
+
+  async updateTeacher(id: string, data: Partial<Teacher>): Promise<Teacher | null> {
+    return this.teacherModel
+      .findByIdAndUpdate(
+        id,
+        {
+          name: data?.name ?? null,
+          email: data?.email ?? null,
+          age: data?.age ?? null,
+        },
+        { overwriteDiscriminatorKey: true, new: true },
+      )
+      .exec();
+  }
+
+  async patchTeacher(id: string, data: Partial<Teacher>): Promise<Teacher | null> {
+    return this.teacherModel.findByIdAndUpdate(id, data, { new: true }).exec();
+  }
+
+  async deleteTeacher(id: string): Promise<Teacher | null> {
+    return this.teacherModel.findByIdAndDelete(id).exec();
+  }
 }
