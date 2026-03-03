@@ -13,6 +13,8 @@ import { EnvironmentService } from './environment/environment.service';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { TeacherModule } from './teacher/teacher.module';
+import { UserModule } from './user/user.module';
+import { EmployeeModule } from './employee/employee.module';
 
 @Module({
   imports: [
@@ -23,6 +25,8 @@ import { TeacherModule } from './teacher/teacher.module';
     }),
     MongooseModule.forRoot(process.env.DATABASE_URL!),
     TeacherModule,
+    UserModule,
+    EmployeeModule,
   ],
   controllers: [
     AppController,
