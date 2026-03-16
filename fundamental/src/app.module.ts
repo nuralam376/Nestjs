@@ -20,6 +20,7 @@ import { LibraryModule } from './library/library.module';
 import { ProjectModule } from './project/project.module';
 import { ClientModule } from './client/client.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { EmployeesModule } from './employees/employees.module';
 
 @Module({
   imports: [
@@ -42,6 +43,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     LibraryModule,
     ProjectModule,
     ClientModule,
+    EmployeesModule,
   ],
   controllers: [
     AppController,
